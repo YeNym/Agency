@@ -1,0 +1,114 @@
+.property-detail-page {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.property-detail-page h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center;
+}
+
+.property-detail-page h2 {
+    font-size: 1.5rem;
+    color: #222;
+    margin-bottom: 15px;
+}
+
+.property-detail-page p {
+    margin: 8px 0;
+    color: #555;
+    line-height: 1.6;
+}
+
+.form-group {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form-group label {
+    font-weight: 600;
+    color: #ffffff;
+}
+
+
+.form-group select {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    background-color: #f9f9f9;
+}
+
+.form-group button {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.form-group button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.form-group button:hover:not(:disabled) {
+    background-color: #0056b3;
+}
+
+.property-detail-page button {
+    padding: 10px 20px;
+    margin-top: 20px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.property-detail-page button:hover {
+    background-color: #218838;
+}
+
+.property-detail-page a button {
+    background-color: #ffc107;
+    color: #212529;
+    margin-left: 10px;
+}
+
+.property-detail-page a button:hover {
+    background-color: #e0a800;
+}
+
+
+.back-button {
+    background-color: transparent;
+    border: none;
+    color: #a3a3a3;
+    font-size: 16px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin: 20px;
+    width: 100px;
+}
+
+.back-button:hover {
+
+    background-color: #3b3c3e;
+}

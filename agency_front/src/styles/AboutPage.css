@@ -1,0 +1,64 @@
+.about-page {
+    font-family: 'Segoe UI', sans-serif;
+    color: #333;
+    padding: 40px 20px;
+    max-width: 900px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.about-hero {
+    background: linear-gradient(135deg, #4a90e2, #0057b7);
+    color: white;
+    border-radius: 12px;
+    padding: 40px 30px;
+    text-align: center;
+    margin-bottom: 40px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.about-hero h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.about-hero p {
+    font-size: 18px;
+    opacity: 0.9;
+}
+
+.about-section {
+    background-color: #f9f9f9;
+    padding: 30px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.about-section.highlight {
+    background-color: #eef6ff;
+}
+
+.about-section h2 {
+    font-size: 24px;
+    margin-bottom: 16px;
+    color: #4a90e2;
+}
+
+.about-section ul {
+    padding-left: 20px;
+}
+
+.about-section ul li {
+    margin-bottom: 8px;
+}
+
+.contact-info {
+    background-color: #fffbe6;
+    border: 1px solid #ffe58f;
+}
+
+.contact-info p {
+    font-size: 16px;
+    font-weight: 500;
+}

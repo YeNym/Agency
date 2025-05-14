@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+.app-layout {
+    position: relative;
+    min-height: 100vh;
+    background-color: #2B2B2B; /* Примерный цвет как в Material-UI */
+    font-family: "Montserrat", sans-serif;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+}
+
+.content {
+    padding-top: 64px;
+}

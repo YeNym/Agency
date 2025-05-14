@@ -1,0 +1,116 @@
+/* Общие стили для формы */
+.housing-preferences-form {
+    /*max-width: 1200px;*/
+    margin: 20px auto;
+    width: 100%;
+    padding: 20px;
+    background-color: var(--card-bg);
+    border-radius: 10px;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+.form-row{
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    justify-content: center;
+    width: 100%;
+}
+.form-cont{
+    display: flex;
+    flex-direction: column;
+}
+/* Заголовок */
+.housing-preferences-form h2 {
+    font-size: 2rem;
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Контейнер формы */
+.form-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+
+/* Общие стили для групп полей */
+.form-group {
+    flex: 1 1 calc(33.33% - 20px); /* 3 колонки */
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+
+
+}
+.form-group textarea{
+    width: 100%;
+    height: 100%;
+}
+.form-group input, .form-group select, .form-group textarea {
+    padding: 12px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    outline: none;
+    transition: border 0.3s ease, box-shadow 0.3s ease;
+    width: 100%;
+    background-color: #fff;
+    color: #333;
+}
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+    border-color: #4CAF50;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+}
+
+.submit-button {
+    width: 100%;
+    padding: 12px;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+    background-color: #45a049;
+}
+
+.message {
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 20px;
+    text-align: center;
+    font-size: 1rem;
+}
+
+.success {
+    background-color: #e8f5e9;
+    color: #388e3c;
+}
+
+.error {
+    background-color: #fce4ec;
+    color: #d32f2f;
+}
+
+@media (max-width: 768px) {
+    .form-group {
+        flex: 1 1 100%;
+    }
+
+    .submit-button {
+        font-size: 1rem;
+    }
+}

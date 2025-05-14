@@ -1,0 +1,139 @@
+/* Основные переменные (можно вынести в :root) */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+    --bg-color: #2B2B2B;
+    --card-bg: rgba(0, 0, 0, 0.43);
+    --primary-color: #3f51b5;
+    --text-light: white;
+    --text-muted: rgba(255, 255, 255, 0.7);
+}
+
+.background-container {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    background-color: #2B2B2B;
+    overflow: hidden;
+}
+.advertisement-list-container{
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
+}
+.advertisement-list{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+.advertisement-list h1{
+    text-align: center;
+}
+.decorative-image-1 {
+    position: fixed;
+    width: 35vw;
+    height: 33vw;
+    background-image: url('../img/abstract3g.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    top: 4%;
+    left: -10%;
+    z-index: 0;
+}
+
+.decorative-image-2 {
+    position: fixed;
+    width: 40vw;
+    height: 40vw;
+    background-image: url('../img/abstract21g.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    bottom: 8%;
+    right: -20%;
+    z-index: 0;
+    pointer-events: none; /* отключает события мыши */
+}
+.content-main{
+    position: relative;
+    z-index: 1;
+    padding-left: 2.5vw;
+    padding-right: 2.5vw;
+    min-height: 100vh; /* Чтобы контент заполнял весь экран */
+}
+.user-info {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1.875rem;
+    background-color: var(--card-bg);
+    border-radius: 10px;
+    backdrop-filter: blur(5px);
+    width: auto;
+    align-items: center;
+
+
+}
+
+.user-info-container {
+    display: flex;
+    flex-direction: row;
+    gap: 0.75rem;
+    align-items: center;
+    width: 100%;
+}
+.avatar-container {
+    position: relative;
+}
+
+.avatar-circle {
+    width: 4.5rem;
+    height: 4.5rem;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.user-name-container {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.user-name {
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: white;
+}
+
+.user-role {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-top: 5px;
+}
+.dop-info{
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    font-size: 1rem;
+}
+.ManagerApplications-container{
+    display: flex;
+    flex-direction: row;
+}
+.applications-list{
+    display: flex;
+    flex-direction: row;
+    gap: 3rem;
+}
+.accessible_properties {
+    margin-top: 40px;
+    background-color: var(--card-bg);
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}

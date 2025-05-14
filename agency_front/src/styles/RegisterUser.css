@@ -1,0 +1,104 @@
+/* Основной контейнер */
+.register-container {
+    max-width: 100%;
+    padding: 2rem;
+    background-color: var(--card-bg);
+    border-radius: 10px;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    box-sizing: border-box;
+}
+
+.register-container h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    color: #40dd73;
+}
+
+/* Форма и её элементы */
+.register-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: space-between;
+}
+input::placeholder,
+textarea::placeholder {
+    color: #a3a3a3;
+    font-style: italic;
+    font-size: 16px;
+    opacity: 1;
+}
+.form-group {
+    flex: 1 1 calc(33.33% - 1rem);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 250px;
+}
+
+.form-group label {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    color: #ffffff;
+}
+
+.form-group input,
+.form-group select {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: white;
+    transition: border-color 0.2s;
+    width: 80%;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #40dd73;
+    outline: none;
+}
+
+/* Ошибка */
+.error-message {
+    color: #e11d48;
+    background-color: #fef2f2;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid #fca5a5;
+    border-radius: 6px;
+    text-align: center;
+}
+
+/* Кнопка */
+.submit-button {
+    flex: 1 1 100%;
+    padding: 0.75rem;
+    font-size: 1.1rem;
+    background-color: #40dd73;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 1.5rem;
+    transition: background-color 0.2s;
+}
+
+.submit-button:hover {
+    background-color: #38b866;
+}
+
+@media (max-width: 1024px) {
+    .form-group {
+        flex: 1 1 calc(50% - 1rem);
+    }
+}
+
+@media (max-width: 640px) {
+    .form-group {
+        flex: 1 1 100%;
+    }
+}

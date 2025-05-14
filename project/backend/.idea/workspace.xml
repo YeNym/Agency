@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="a9a8d99c-04ec-4166-86d2-b508e062fb83" name="Changes" comment="редактирование и удаление предпочтений">
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../agency_front" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Enum" />
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;YeNym&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/YeNym/real-estate-agency.git&quot;,
+    &quot;accountId&quot;: &quot;0f88d394-b751-4aaa-9a02-a263f19aed8d&quot;
+  }
+}</component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="2wUTLXWjPe72ozi3L71ljC3BEv9" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Spring Boot.ProjectApplication.executor": "Run",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/download/project/backend",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql"
+    ]
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="agency.project.controller" />
+      <recent name="agency.project.services" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\project\project\src\main\java\agency\project\services" />
+      <recent name="D:\project\project\src\main\java\agency\project\controller" />
+      <recent name="D:\project\project\src\main\java\agency\project" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="agency.project.repository" />
+      <recent name="agency.project.services" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="ProjectApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="project" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="agency.project.ProjectApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23339.11" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23339.11" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a9a8d99c-04ec-4166-86d2-b508e062fb83" name="Changes" comment="" />
+      <created>1746095097253</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1746095097253</updated>
+      <workItem from="1746095098398" duration="23389000" />
+      <workItem from="1746176611702" duration="2756000" />
+      <workItem from="1746204607452" duration="14869000" />
+      <workItem from="1746219772858" duration="24000" />
+      <workItem from="1746267014325" duration="16773000" />
+      <workItem from="1746547253584" duration="3998000" />
+      <workItem from="1746552039162" duration="153000" />
+      <workItem from="1746555080274" duration="5493000" />
+      <workItem from="1746604781606" duration="10799000" />
+      <workItem from="1746619787496" duration="14094000" />
+      <workItem from="1746636092163" duration="7703000" />
+      <workItem from="1746780230489" duration="14171000" />
+      <workItem from="1746800407466" duration="304000" />
+      <workItem from="1746802497693" duration="3090000" />
+      <workItem from="1746970203238" duration="20666000" />
+      <workItem from="1747040340057" duration="9981000" />
+      <workItem from="1747130606917" duration="27732000" />
+      <workItem from="1747225718679" duration="212000" />
+    </task>
+    <task id="LOCAL-00001" summary="ы">
+      <option name="closed" value="true" />
+      <created>1746219416915</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1746219416915</updated>
+    </task>
+    <task id="LOCAL-00002" summary="обновленее старых методов, рабочий вариант создания предпочтений, регистрации пользователей">
+      <option name="closed" value="true" />
+      <created>1746787759673</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1746787759673</updated>
+    </task>
+    <task id="LOCAL-00003" summary="настроено отображение квартир с открытым администратором доступов">
+      <option name="closed" value="true" />
+      <created>1746978162840</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1746978162840</updated>
+    </task>
+    <task id="LOCAL-00004" summary="настроена корректная работа отправки и обработки менеджером запроса на обмен помещениями. Но нет отображения статуса заявки и нет запрета на создание технического помоещенния со статусом Travelling">
+      <option name="closed" value="true" />
+      <created>1747052656237</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1747052656237</updated>
+    </task>
+    <task id="LOCAL-00005" summary="редактирование и удаление клиентов">
+      <option name="closed" value="true" />
+      <created>1747132571758</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1747132571758</updated>
+    </task>
+    <task id="LOCAL-00006" summary="редактирование и удаление предпочтений">
+      <option name="closed" value="true" />
+      <created>1747139045861</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1747139045861</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="ы" />
+    <MESSAGE value="обновленее старых методов, рабочий вариант создания предпочтений, регистрации пользователей" />
+    <MESSAGE value="настроено отображение квартир с открытым администратором доступов" />
+    <MESSAGE value="настроена корректная работа отправки и обработки менеджером запроса на обмен помещениями. Но нет отображения статуса заявки и нет запрета на создание технического помоещенния со статусом Travelling" />
+    <MESSAGE value="редактирование и удаление клиентов" />
+    <MESSAGE value="редактирование и удаление предпочтений" />
+    <option name="LAST_COMMIT_MESSAGE" value="редактирование и удаление предпочтений" />
+  </component>
+</project>

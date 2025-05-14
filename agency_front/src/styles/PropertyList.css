@@ -1,0 +1,32 @@
+.property-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    padding: 3rem;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+    background-color: var(--card-bg);
+    border-radius: 10px;
+    backdrop-filter: blur(5px);
+}
+
+.no-properties {
+    color: #888;
+    font-size: 16px;
+    padding: 3rem;
+    text-align: center;
+    width: 100%;
+}
+.travel-properties-container h2 {
+    font-size: 28px;
+    margin-bottom: 30px;
+    color: #ffffff;
+    text-align: center;
+}
+.travel-properties-container{
+    margin-top: 3rem;
+}
+.error {
+    color: #e74c3c;
+}

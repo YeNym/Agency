@@ -1,0 +1,77 @@
+/* EditPropertyPage.css */
+.edit-property-page {
+    max-width: 600px;
+    margin: 40px auto;
+    background-color: #fdfdfd;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.edit-property-page h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+    text-align: center;
+}
+
+.edit-property-page form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.edit-property-page label {
+    display: flex;
+    flex-direction: column;
+    font-weight: 500;
+    color: #444;
+    font-size: 14px;
+}
+
+.edit-property-page input[type="text"],
+.edit-property-page input[type="number"],
+.edit-property-page textarea {
+    padding: 8px 12px;
+    border-radius: 6px;
+    color: #000; /* Добавлено для чёрного текста */
+
+    border: 1px solid #ccc;
+    font-size: 14px;
+    margin-top: 6px;
+    transition: border-color 0.2s;
+}
+
+.edit-property-page input[type="text"]:focus,
+.edit-property-page input[type="number"]:focus,
+.edit-property-page textarea:focus {
+    outline: none;
+    border-color: #4a90e2;
+}
+
+.edit-property-page input[type="checkbox"] {
+    margin-top: 10px;
+    transform: scale(1.2);
+}
+
+.edit-property-page textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.edit-property-page button[type="submit"] {
+    padding: 10px 20px;
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.edit-property-page button[type="submit"]:hover {
+    background-color: #357ab8;
+}
