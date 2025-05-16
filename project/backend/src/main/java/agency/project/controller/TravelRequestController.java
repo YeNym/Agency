@@ -17,7 +17,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/travel-requests")
+    @RequestMapping("/api/travel-requests")
 public class TravelRequestController {
 
     private final TravelRequestService travelRequestService;
@@ -96,7 +96,15 @@ public class TravelRequestController {
 
         return ResponseEntity.ok(dtos);
     }
-
+    @GetMapping("/{id}/status")
+    public ResponseEntity<?> getStatusById(@PathVariable Long id) {
+        try {
+            RequestStatus status = travelRequestService.getStatusById(id);
+            return ResponseEntity.ok(status.name());
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 
 
 }

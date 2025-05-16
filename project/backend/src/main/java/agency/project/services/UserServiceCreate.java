@@ -35,7 +35,9 @@ public class UserServiceCreate {
 
     @Transactional
     public void registerUser(UserRegistrationDto registrationDto, User createdBy) {
-        // Проверка прав доступа
+        if (userRepository.existsByEmail(registrationDto.getEmail())) {
+            throw new RuntimeException("Пользователь с таким email уже существует");
+        }
         checkCreationPermissions(createdBy, registrationDto.getRole());
 
         // Создаем базового пользователя
@@ -46,6 +48,17 @@ public class UserServiceCreate {
         user.setEmail(registrationDto.getEmail());
         user.setPassword(passwordEncoder.encode(registrationDto.getPassword()));
         user.setRole(registrationDto.getRole());
+
+        if (registrationDto.getRole() == Role.CLIENT &&
+                clientRepository.existsByPhone(registrationDto.getPhone())) {
+            throw new RuntimeException("Пользователь с таким телефоном уже существует");
+        }
+
+        // Проверка уникальности паспорта (для клиентов)
+        if (registrationDto.getRole() == Role.CLIENT &&
+                clientRepository.existsByPassport(registrationDto.getPassport())) {
+            throw new RuntimeException("Пользователь с таким паспортом уже существует");
+        }
 
         User savedUser = userRepository.save(user);
 

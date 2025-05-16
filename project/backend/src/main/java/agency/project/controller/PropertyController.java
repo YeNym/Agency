@@ -7,25 +7,21 @@ import agency.project.entity.Manager;
 import agency.project.entity.Property;
 import agency.project.entity.User;
 import agency.project.entity.enumerated.*;
-import agency.project.repository.PropertyRepository;
-import agency.project.services.ClientService;
-import agency.project.services.ManagerService;
-import agency.project.services.PropertyService;
-import agency.project.services.UserService;
+import agency.project.services.*;
 import agency.project.services.filter_services.PropertyQueryService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityNotFoundException;
-import jakarta.transaction.Transactional;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/properties")
@@ -35,15 +31,17 @@ public class PropertyController {
     private ManagerService managerService;
     private final PropertyQueryService propertyQueryService;
     private final ClientService clientService;
+    private final ImageService imageService;
 
     public PropertyController(PropertyService propertyService,
                               ManagerService managerService,
                               PropertyQueryService propertyQueryService,
-                              ClientService clientService) {
+                              ClientService clientService,ImageService imageService) {
         this.propertyService = propertyService;
         this.propertyQueryService = propertyQueryService;
         this.managerService = managerService;
         this.clientService = clientService;
+        this.imageService = imageService;
 
     }
 
@@ -59,16 +57,75 @@ public class PropertyController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @PostMapping
-    public Property createProperty(@RequestBody Property property,
-                                   @AuthenticationPrincipal User authUser) {
-        Manager manager = managerService.getManagerByUserId(authUser.getId());
 
-        property.setCreatedByManager(manager);
-        Client owner = clientService.getById(property.getOwner().getId());
-        property.setOwner(owner);
-        return propertyService.save(property);
+
+//    @PostMapping
+//    public Property createProperty(@RequestBody Property property,
+//                                   @AuthenticationPrincipal User authUser) {
+//        Manager manager = managerService.getManagerByUserId(authUser.getId());
+//
+//        property.setCreatedByManager(manager);
+//        Client owner = clientService.getById(property.getOwner().getId());
+//        property.setOwner(owner);
+//        return propertyService.save(property);
+//    }
+
+    @PostMapping
+    public ResponseEntity<Property> createProperty(
+            @RequestParam("file") MultipartFile[] files,
+            @RequestParam("propertyData") String propertyDataJson,
+            @AuthenticationPrincipal User authUser) {
+
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            Property property = mapper.readValue(propertyDataJson, Property.class);
+
+            Manager manager = managerService.getManagerByUserId(authUser.getId());
+            property.setCreatedByManager(manager);
+            Client owner = clientService.getById(property.getOwner().getId());
+            property.setOwner(owner);
+
+            // Сохраняем каждое изображение и добавляем путь в property
+            for (MultipartFile file : files) {
+                String savedFileName = imageService.saveImage(file);
+                property.addImagePath(savedFileName);
+            }
+
+            Property savedProperty = propertyService.save(property);
+
+            return ResponseEntity.ok(savedProperty);
+
+        } catch (IOException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
     }
+
+
+
+    @PostMapping("/upload-image")
+    public ResponseEntity<String> uploadImage(@RequestParam("file") MultipartFile file) {
+        try {
+            String savedFileName = imageService.saveImage(file);
+            return ResponseEntity.ok(savedFileName);
+        } catch (IOException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Ошибка при сохранении файла");
+        }
+    }
+
+
+//    @GetMapping("/images/{filename:.+}")
+//    public ResponseEntity<Resource> getImage(@PathVariable String filename) {
+//        Path filePath = Paths.get(uploadPath).resolve(filename);
+//        try {
+//            Resource resource = new UrlResource(filePath.toUri());
+//            return ResponseEntity.ok()
+//                    .contentType(MediaType.IMAGE_JPEG)
+//                    .body(resource);
+//        } catch (MalformedURLException e) {
+//            return ResponseEntity.notFound().build();
+//        }
+//    }
+
 
     @GetMapping("/find-by-managers/{managerId}")
     public ResponseEntity<List<Property>> getPropertiesByManagerId(@PathVariable Long managerId) {

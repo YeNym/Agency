@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { getPropertyById, updateProperty } from '../api/propertyService';
+import {getPropertyById, getPropertyEnums, updateProperty} from '../api/propertyService';
 import "../styles/EditPropertyPage.css"
+import {getClientsByManager} from "../api/ClientService";
 
 const EditPropertyPage = () => {
     const { id } = useParams();
@@ -9,6 +10,27 @@ const EditPropertyPage = () => {
     const [property, setProperty] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [enumValues, setEnumValues] = useState({
+        propertyTypes: [],
+        propertyLevels: [],
+        statuses: []
+    });
+    useEffect(() => {
+        const fetchEnums = async () => {
+            try {
+                const data = await getPropertyEnums();
+                setEnumValues({
+                    propertyTypes: data.propertyTypes || [],
+                    propertyLevels: data.propertyLevels || [],
+                    statuses: data.statuses || []
+                });
+            } catch (err) {
+                console.error('Ошибка загрузки enum значений:', err);
+            }
+        };
+
+        fetchEnums();
+    }, []);
 
     useEffect(() => {
         const fetchProperty = async () => {
@@ -52,7 +74,7 @@ const EditPropertyPage = () => {
         try {
             await updateProperty(id, property);
             alert('Недвижимость успешно обновлена');
-            navigate(`/properties/${id}`);
+            navigate(`/manager-dashboard`);
         } catch (err) {
             alert('Ошибка при сохранении');
         }
@@ -65,6 +87,7 @@ const EditPropertyPage = () => {
         <div className="edit-property-page">
             <h2>Редактирование недвижимости</h2>
             <form onSubmit={handleSubmit}>
+                <div className="form-columns">
                 <label>Район:
                     <input type="text" name="address.district" value={property.address?.district || ''} onChange={handleChange} />
                 </label>
@@ -83,40 +106,62 @@ const EditPropertyPage = () => {
                 </label>
 
 
-                <label>Уровень:
-                    <input type="text" name="propertyLevel" value={property.propertyLevel || ''} onChange={handleChange} required />
+                <label>
+                    Уровень:
+                    <select name="propertyLevel" value={property.propertyLevel} onChange={handleChange}>
+                        <option value="">Выберите уровень</option>
+                        {enumValues.propertyLevels.map(level => (
+                            <option key={level} value={level}>{level}</option>
+                        ))}
+                    </select>
                 </label>
+
+                </div>
+                <div className="form-columns">
                 <label>Описание:
                     <textarea name="description" value={property.description || ''} onChange={handleChange} required />
                 </label>
-                <label>Тип:
-                    <input type="text" name="propertyType" value={property.propertyType || ''} onChange={handleChange} required />
+                <label>
+                    Тип недвижимости:
+                    <select name="propertyType" value={property.propertyType} onChange={handleChange} required>
+                        <option value="">Выберите тип</option>
+                        {enumValues.propertyTypes.map(type => (
+                            <option key={type} value={type}>{type}</option>
+                        ))}
+                    </select>
                 </label>
-                <label>Статус:
-                    <input type="text" name="status" value={property.status || ''} onChange={handleChange} required />
+                <label>
+                    Статус:
+                    <select name="status" value={property.status} onChange={handleChange} required>
+                        {enumValues.statuses.map(status => (
+                            <option key={status} value={status}>{status}</option>
+                        ))}
+                    </select>
                 </label>
-                <label className="checkbox-label">
-                    <input
-                        type="checkbox"
-                        name="hasBalcony"
-                        checked={property.allowPets || false}
-                        onChange={handleChange}
-                    />
-                    <span className="custom-checkbox"></span>
-                    Животные
-                </label>
+                </div>
+                <div className="checkbox-label-conainer">
+                    <label className="checkbox-label">
+                        <input
+                            type="checkbox"
+                            name="hasBalcony"
+                            checked={property.allowPets || false}
+                            onChange={handleChange}
+                        />
+                        <span className="custom-checkbox"></span>
+                        Животные
+                    </label>
 
-                <label className="checkbox-label">
-                    <input
-                        type="checkbox"
-                        name="allowPets"
-                        checked={property.hasBalcony || false}
-                        onChange={handleChange}
-                    />
-                    <span className="custom-checkbox"></span>
-                    Балкон
-                </label>
-
+                    <label className="checkbox-label">
+                        <input
+                            type="checkbox"
+                            name="hasBalcony"
+                            checked={property.hasBalcony || false}
+                            onChange={handleChange}
+                        />
+                        <span className="custom-checkbox"></span>
+                        Балкон
+                    </label>
+                </div>
 
 
                 <button type="submit">Сохранить</button>

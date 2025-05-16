@@ -8,6 +8,7 @@ import agency.project.repository.ClientRepository;
 import agency.project.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -20,10 +21,12 @@ public class ClientService {
 
     private final ClientRepository clientRepository;
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public ClientService(ClientRepository clientRepository, UserRepository userRepository) {
+    public ClientService(ClientRepository clientRepository, UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.clientRepository = clientRepository;
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
     public List<Client> getAll() {
         return clientRepository.findAll();
@@ -79,7 +82,7 @@ public class ClientService {
             user.setEmail(dto.getEmail());
 
             if (dto.getPassword() != null && !dto.getPassword().isEmpty()) {
-                user.setPassword(dto.getPassword()); // Не забудь зашифровать при необходимости
+                user.setPassword(passwordEncoder.encode(dto.getPassword()));
             }
 
             userRepository.save(user);
@@ -97,6 +100,11 @@ public class ClientService {
                 () -> new EntityNotFoundException("Клиент не найден с ID: " + clientId)
         );
         clientRepository.deleteById(clientId);
+    }
+
+
+    public Optional<User> getUserByClientId(Long clientId) {
+        return clientRepository.findUserByClientId(clientId);
     }
 
 }

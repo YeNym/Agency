@@ -9,6 +9,7 @@ import RegisterUser from "../components/RegisterUser";
 import ClientList from "../components/ClientList";
 import CreateHousingPreferences from "../components/CreateHousingPreferences";
 import ManagerApplications from "../components/ManagerApplications";
+import ExcelReportButton from "../constants/ExcelReportGenerator";
 
 const ManagerDashboard = () => {
     const { user } = useAuth();
@@ -62,6 +63,7 @@ const ManagerDashboard = () => {
                     </div>
                     <div className="client-list-container">
                         <ClientList managerId={manager.id} />
+                        <ExcelReportButton managerId={manager.id} />
                     </div>
                     <div>
                         <CreateHousingPreferences managerId={manager.id}/>

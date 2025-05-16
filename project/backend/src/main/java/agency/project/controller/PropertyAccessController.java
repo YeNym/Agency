@@ -27,26 +27,38 @@ public class PropertyAccessController {
         this.authenticationService = authenticationService;
     }
 
-
-    //предоставление доступа клиенту к квартире
     @PostMapping
     public ResponseEntity<ClientPropertyAccess> grantAccess(
             @RequestBody GrantAccessRequest request,
             @AuthenticationPrincipal User currentUser) {
 
-            //todo вернуть проверку на роль перед выполнением запроса
-            // Manager manager = authenticationService.getAuthenticatedManager(currentUser);
-
-        Long managerId = 152L; // ID тестового менеджера или null
+        Manager manager = authenticationService.getAuthenticatedManager(currentUser);
         ClientPropertyAccess access = accessService.grantAccess(
-//                manager.getId(),
-                managerId,
+                manager.getId(),
                 request.getClientId(),
                 request.getPropertyId()
         );
-
         return ResponseEntity.ok(access);
     }
+    //предоставление доступа клиенту к квартире
+//    @PostMapping
+//    public ResponseEntity<ClientPropertyAccess> grantAccess(
+//            @RequestBody GrantAccessRequest request,
+//            @AuthenticationPrincipal User currentUser) {
+//
+//            //todo вернуть проверку на роль перед выполнением запроса
+//            // Manager manager = authenticationService.getAuthenticatedManager(currentUser);
+//
+//        Long managerId = 152L; // ID тестового менеджера или null
+//        ClientPropertyAccess access = accessService.grantAccess(
+////                manager.getId(),
+//                managerId,
+//                request.getClientId(),
+//                request.getPropertyId()
+//        );
+//
+//        return ResponseEntity.ok(access);
+//    }
 
     @DeleteMapping("/{accessId}")
     public ResponseEntity<Void> revokeAccess(

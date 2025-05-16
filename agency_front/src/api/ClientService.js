@@ -48,3 +48,13 @@ export const updatePreferences = async (clientId, prefId, preferencesData) => {
         throw error;
     }
 };
+
+export const getUserByClientId = async (clientId) => {
+    try {
+        const response = await api.get(`/clients/${clientId}/user`);
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching user:', error);
+        throw error; // Пробрасываем ошибку для обработки в вызывающем коде
+    }
+};

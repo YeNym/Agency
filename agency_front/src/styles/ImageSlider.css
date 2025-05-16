@@ -1,0 +1,123 @@
+.slider {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    margin: 1rem 0;
+    background: #1a1a1a;
+
+    aspect-ratio: 16/9; /* Удалите это, если хотите полностью свободное соотношение */
+
+}
+
+.slider-image {
+    width: 100%;
+    height: auto;
+    max-height: 70vh;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    background: #000;
+    transition: opacity 0.3s ease;
+}
+.slider-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(76, 175, 80, 0.8);
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(2px);
+}
+
+.slider-button:hover {
+    background: #4CAF50;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.slider-button.left {
+    left: 20px;
+}
+
+.slider-button.right {
+    right: 20px;
+}
+
+.dots-container {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.dot.active {
+    background: #4CAF50;
+    transform: scale(1.2);
+}
+
+/* ImageSlider.css */
+.pagination {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 8px 15px;
+    border-radius: 20px;
+    color: white;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.current-slide {
+    color: #4CAF50;
+    font-weight: bold;
+}
+
+.total-slides {
+    opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+    .slider-image {
+        height: 300px;
+    }
+
+    .slider-button {
+        width: 35px;
+        height: 35px;
+        font-size: 1.2rem;
+    }
+}
+@media (max-width: 1024px) {
+    .slider-image {
+        max-height: 50vh;
+    }
+}
+
+@media (max-width: 768px) {
+    .slider-image {
+        max-height: 40vh;
+    }
+}

@@ -104,5 +104,10 @@ public class TravelRequestService {
         return travelRequestRepository.findByManagerIdAndStatusNotPending(managerId);
     }
 
+    public RequestStatus getStatusById(Long requestId) {
+        return travelRequestRepository.findById(requestId)
+                .map(TravelRequest::getStatus)
+                .orElseThrow(() -> new IllegalArgumentException("Запрос с id " + requestId + " не найден"));
+    }
 
 }

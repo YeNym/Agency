@@ -1,114 +1,146 @@
-.property-detail-page {
-    max-width: 800px;
-    margin: 40px auto;
-    padding: 30px;
-    background-color: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    font-family: 'Segoe UI', sans-serif;
-}
-
-.property-detail-page h1 {
-    font-size: 2rem;
-    margin-bottom: 20px;
-    color: #333;
-    text-align: center;
-}
-
-.property-detail-page h2 {
-    font-size: 1.5rem;
-    color: #222;
-    margin-bottom: 15px;
-}
-
-.property-detail-page p {
-    margin: 8px 0;
-    color: #555;
-    line-height: 1.6;
-}
-
-.form-group {
-    margin-top: 30px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.form-group label {
-    font-weight: 600;
+.propertyDetailPage {
+    background-color: #0a0a0a;
+    min-height: 100vh;
     color: #ffffff;
+    padding: 2rem;
+    font-family: 'Inter', sans-serif;
 }
-
-
-.form-group select {
-    padding: 10px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    font-size: 1rem;
-    background-color: #f9f9f9;
-}
-
-.form-group button {
-    padding: 10px 15px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.form-group button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-}
-
-.form-group button:hover:not(:disabled) {
-    background-color: #0056b3;
-}
-
-.property-detail-page button {
-    padding: 10px 20px;
-    margin-top: 20px;
-    background-color: #28a745;
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.property-detail-page button:hover {
-    background-color: #218838;
-}
-
-.property-detail-page a button {
-    background-color: #ffc107;
-    color: #212529;
-    margin-left: 10px;
-}
-
-.property-detail-page a button:hover {
-    background-color: #e0a800;
-}
-
 
 .back-button {
-    background-color: transparent;
+    background: none;
     border: none;
-    color: #a3a3a3;
-    font-size: 16px;
+    color: #4CAF50;
+    font-size: 1.2rem;
     cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    margin: 20px;
-    width: 100px;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: all 0.3s;
+    margin-bottom: 2rem;
 }
 
 .back-button:hover {
+    background-color: rgba(76, 175, 80, 0.1);
+}
 
-    background-color: #3b3c3e;
+.details-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: #1a1a1a;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.property-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.property-header h1 {
+    color: #4CAF50;
+    font-size: 2.5rem;
+    margin: 0;
+}
+
+.property-info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.property-info-section {
+    background: #262626;
+    padding: 1.5rem;
+    border-radius: 8px;
+    border-left: 4px solid #4CAF50;
+}
+
+.property-info-section h3 {
+    color: #4CAF50;
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+.info-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #333;
+}
+
+.info-label {
+    color: #888;
+}
+
+.info-value {
+    color: #fff;
+}
+
+.actions-section {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid #333;
+}
+
+.select-client {
+    background: #262626;
+    color: #fff;
+    border: 1px solid #4CAF50;
+    padding: 0.8rem;
+    border-radius: 6px;
+    width: 100%;
+    margin: 1rem 0;
+}
+
+.button-group {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.btn-primary {
+    background: #4CAF50;
+    color: white;
+    border: none;
+    width: 100%;
+    padding: 0.8rem 1.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-primary:hover {
+    background: #45a049;
+    transform: translateY(-1px);
+}
+
+.btn-danger {
+    background: #ff4444;
+}
+
+.btn-danger:hover {
+    background: #cc0000;
+}
+
+.image-slider-container {
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 2rem;
+}
+
+@media (max-width: 768px) {
+    .details-container {
+        padding: 1rem;
+    }
+
+    .property-header h1 {
+        font-size: 2rem;
+    }
+
+    .property-info-grid {
+        grid-template-columns: 1fr;
+    }
 }

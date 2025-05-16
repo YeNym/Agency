@@ -12,7 +12,7 @@ const RegisterUser = () => {
         patronymic: '',
         email: '',
         password: '',
-        role: 'CLIENT',
+        role: '',
         phone: '',
         passport: '',
         accessLevel: '',
@@ -26,13 +26,11 @@ const RegisterUser = () => {
     const [isLoadingEnums, setIsLoadingEnums] = useState(true);
 
     useEffect(() => {
-        // Загрузка доступных уровней доступа
         const loadEnums = async () => {
             try {
                 const enums = await getPropertyEnums();
                 const levels = enums.accessLevels || [
                     { value: 'BASIC', label: 'Базовый' },
-                    { value: 'OWNER', label: 'Владелец' },
                     { value: 'TRAVELER', label: 'Путешественник' }
                 ];
 
@@ -49,19 +47,19 @@ const RegisterUser = () => {
             }
         };
 
-        // Определение доступных ролей в зависимости от текущего пользователя
         const determineAllowedRoles = () => {
             if (!user) return;
 
             const userRoles = user.role || [];
 
             if (userRoles.includes('ADMIN')) {
-                setAllowedRoles(['CLIENT', 'MANAGER', 'ADMIN']);  // Администратор может создавать все роли
+                setAllowedRoles(['MANAGER', 'ADMIN']);
+                // Не устанавливаем роль по умолчанию
             } else if (userRoles.includes('MANAGER')) {
-                setAllowedRoles(['CLIENT']);  // Менеджер может создавать только клиентов
+                setAllowedRoles(['CLIENT']);
                 setFormData(prev => ({ ...prev, role: 'CLIENT' }));
             } else if (userRoles.includes('CLIENT')) {
-                setAllowedRoles(['CLIENT']);  // Клиент не может создавать других пользователей
+                setAllowedRoles(['CLIENT']);
             }
         };
 
@@ -80,6 +78,10 @@ const RegisterUser = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        if (!formData.role && !(user?.role?.includes('MANAGER'))) {
+            setError('Пожалуйста, выберите роль');
+            return;
+        }
         // Проверка прав доступа
         const userRoles = user?.role || [];
         if (!user || userRoles.includes('CLIENT')) {
@@ -105,7 +107,7 @@ const RegisterUser = () => {
                 patronymic: '',
                 email: '',
                 password: '',
-                role: allowedRoles[0],
+                role: user?.role?.includes('MANAGER') ? 'CLIENT' : '', // Для менеджера снова ставим CLIENT
                 phone: '',
                 passport: '',
                 accessLevel: accessLevels[0]?.value || '',
@@ -113,12 +115,26 @@ const RegisterUser = () => {
             });
             alert('Пользователь успешно зарегистрирован!');
         } catch (err) {
-            setError(err.message || 'Ошибка регистрации пользователя');
+            let errorMessage = 'Ошибка регистрации';
+
+            if (err.response) {
+                // Если сервер вернул JSON { message: "..." }
+                if (err.response.data?.message) {
+                    errorMessage = err.response.data.message;
+                }
+                // Если сервер вернул просто строку
+                else if (typeof err.response.data === 'string') {
+                    errorMessage = err.response.data;
+                }
+            } else {
+                errorMessage = err.message;
+            }
+
+            setError(errorMessage);
         } finally {
             setLoading(false);
         }
     };
-
     // Если пользователь не авторизован или это клиент
     const userRoles = user?.role || [];
     if (!user || userRoles.includes('CLIENT')) {
@@ -176,6 +192,7 @@ const RegisterUser = () => {
                         value={formData.email}
                         onChange={handleChange}
                         placeholder="example@example.com"
+                        autoComplete="new-email"  // или "off"
                         required
                     />
                 </div>
@@ -188,6 +205,7 @@ const RegisterUser = () => {
                         value={formData.password}
                         onChange={handleChange}
                         required
+                        autoComplete="new-email"  // или "off"
                         minLength="6"
                     />
                 </div>
@@ -232,6 +250,7 @@ const RegisterUser = () => {
                         required
                         disabled={allowedRoles.length === 1}
                     >
+                        <option value="">-- Выберите роль --</option>
                         {allowedRoles.map(role => (
                             <option key={role} value={role}>
                                 {role === 'CLIENT' && 'Клиент'}
@@ -254,7 +273,7 @@ const RegisterUser = () => {
                         />
                     </div>
                 )}
-
+                {formData.role === 'CLIENT' && (
                 <div className="form-group">
                     <label>Уровень доступа:</label>
                     {isLoadingEnums ? (
@@ -274,7 +293,7 @@ const RegisterUser = () => {
                         </select>
                     )}
                 </div>
-
+                )}
                 <button
                     type="submit"
                     disabled={loading || isLoadingEnums}

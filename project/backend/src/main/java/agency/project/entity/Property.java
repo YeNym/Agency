@@ -13,6 +13,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -65,7 +66,22 @@ public class Property {
     @JsonManagedReference("property-travelRequests")
     private List<TravelRequest> travelRequests;
 
+    @ElementCollection
+    private List<String> imagePaths = new ArrayList<>();
+
+    public void addImagePath(String path) {
+        this.imagePaths.add(path);
+    }
     // Getters and setters
+    public List<String> getImagePaths() {
+        return imagePaths;
+    }
+
+    public void setImagePaths(List<String> imagePaths) {
+        this.imagePaths = imagePaths;
+    }
+
+
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
@@ -107,6 +123,8 @@ public class Property {
 
     public List<TravelRequest> getTravelRequests() { return travelRequests; }
     public void setTravelRequests(List<TravelRequest> travelRequests) { this.travelRequests = travelRequests; }
+
+
 
     public void setCreatedBy(User creator) {
 

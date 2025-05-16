@@ -5,8 +5,12 @@ export const getAllProperties = async () => {
     return response.data;
 };
 
-export const createProperty = async (propertyData) => {
-    const response = await api.post('/properties', propertyData); // убрали managerId
+export const createProperty = async (formData) => {
+    const response = await api.post('/properties', formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
+    });
     return response.data;
 };
 
@@ -15,6 +19,11 @@ export const getPropertyEnums = async () => {
     const response = await api.get('/properties/enums');
     return response.data;
 };
+
+export const getStatusReques = async (requestId) => {
+    const response = await api.get(`/travel-requests/${requestId}/status`);
+    return response.data;
+}
 
 export const getPropertiesByManagerId = async (managerId) => {
     const response = await api.get(`/properties/find-by-managers/${managerId}`);

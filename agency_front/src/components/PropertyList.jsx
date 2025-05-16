@@ -18,6 +18,7 @@ const PropertyList = ({ manager }) => {
     }, [manager]);
 
     return (
+
         <div className="property-list">
 
             {properties.length > 0 ? (

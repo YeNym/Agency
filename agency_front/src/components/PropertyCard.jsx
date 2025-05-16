@@ -12,10 +12,19 @@ const PropertyCard = ({ property }) => {
         <div className="property-card">
             <Link to={`/property/${property.id}`}>
                 <div className="property-image">
-                    <div className="image-placeholder">
-                        {property.propertyType?.charAt(0) || 'P'}
-                    </div>
+                    {property.imagePaths && property.imagePaths.length > 0 ? (
+                        <img
+                            src={`http://localhost:8080/uploads/${property.imagePaths[0]}`}
+                            alt="Недвижимость"
+                            className="property-preview"
+                        />
+                    ) : (
+                        <div className="image-placeholder">
+                            {property.propertyType?.charAt(0) || 'P'}
+                        </div>
+                    )}
                 </div>
+
                 <div className="property-details">
                     <h3 className="property-type">
                         {property.propertyType || 'Тип не указан'}

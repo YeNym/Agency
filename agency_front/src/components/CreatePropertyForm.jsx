@@ -8,6 +8,17 @@ const CreatePropertyForm = ({ onSuccess }) => {
     const navigate = useNavigate();
     const [selectedClientId, setSelectedClientId] = useState('');
     const [clients, setClients] = useState([]);
+    const [images, setImages] = useState([]);
+
+    const handleImageChange = (e) => {
+        const files = Array.from(e.target.files);
+        if (files.length) {
+            setImages(prevImages => [...prevImages, ...files]);
+        }
+    };
+    const handleRemoveImage = (index) => {
+        setImages(prevImages => prevImages.filter((_, i) => i !== index));
+    };
 
     const [formData, setFormData] = useState({
         address: {
@@ -109,29 +120,59 @@ const CreatePropertyForm = ({ onSuccess }) => {
         setError('');
 
         try {
+            const formDataToSend = new FormData();
+
+            // Формируем объект для отправки (с нужными типами полей)
             const payload = {
                 ...formData,
                 rooms: parseInt(formData.rooms),
                 price: parseFloat(formData.price),
                 floor: parseInt(formData.floor),
-                owner: {
-                    id: parseInt(formData.owner)
-                }
+                owner: { id: parseInt(formData.owner) }
             };
 
-            await createProperty(payload);
+            // Добавляем JSON-строку с данными недвижимости
+            formDataToSend.append("propertyData", JSON.stringify(payload));
 
-            if (onSuccess) {
-                await onSuccess();
-            }
+            // Добавляем все выбранные изображения
+            images.forEach((file) => {
+                formDataToSend.append("file", file); // ключ "file" должен совпадать с тем, что ожидает сервер
+            });
 
-            navigate('/properties');
+            // Отправляем данные на сервер
+            await createProperty(formDataToSend);
+
+            // После успешной отправки — очищаем форму
+            setFormData({
+                address: {
+                    city: '',
+                    district: '',
+                    street: '',
+                    building: ''
+                },
+                rooms: '',
+                price: '',
+                floor: '',
+                propertyLevel: '',
+                description: '',
+                owner: '',
+                propertyType: '',
+                status: 'AVAILABLE',
+                hasBalcony: false,
+                allowPets: false
+            });
+            setSelectedClientId('');
+            setImages([]);
+
+            // Вызов коллбэка успешного завершения, если есть
+            if (onSuccess) await onSuccess();
         } catch (err) {
             setError(err.response?.data?.message || 'Ошибка при создании недвижимости');
         } finally {
             setLoading(false);
         }
     };
+
 
     return (
         <div className="create-property-container">
@@ -250,6 +291,46 @@ const CreatePropertyForm = ({ onSuccess }) => {
                             </label>
 
                     </div>
+                    <label>
+                        Изображения:
+                        <input
+                            type="file"
+                            accept="image/*"
+                            multiple
+                            onChange={handleImageChange}
+                        />
+                    </label>
+
+                    {/* Превью выбранных фото */}
+                    <div className="image-preview-container" style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', marginTop: '10px' }}>
+                        {images.map((file, index) => {
+                            const url = URL.createObjectURL(file);
+                            return (
+                                <div key={index} style={{ position: 'relative' }}>
+                                    <img src={url} alt={`preview-${index}`} style={{ width: '100px', height: '100px', objectFit: 'cover', borderRadius: '4px' }} />
+                                    <button
+                                        type="button"
+                                        onClick={() => handleRemoveImage(index)}
+                                        style={{
+                                            position: 'absolute',
+                                            top: 0,
+                                            right: 0,
+                                            background: 'red',
+                                            border: 'none',
+                                            color: 'white',
+                                            borderRadius: '50%',
+                                            width: '20px',
+                                            height: '20px',
+                                            cursor: 'pointer',
+                                        }}
+                                    >
+                                        ×
+                                    </button>
+                                </div>
+                            );
+                        })}
+                    </div>
+
                 </div>
 
                 <div className="submit-container">

@@ -1,5 +1,5 @@
 import { useAuth } from '../../context/AuthContext';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom'; // Добавлен useNavigate
 import { ROLES } from '../../constants/roles';
 import "../../styles/Header.css";
 import {useEffect, useState} from "react";
@@ -8,6 +8,7 @@ import {getClientByUserId} from "../../api/ClientService";
 const Header = () => {
     const { isAuthenticated, user, logout } = useAuth();
     const [client, setClient] = useState(null);
+    const navigate = useNavigate(); // Хук для навигации
 
     useEffect(() => {
         const fetchClient = async () => {
@@ -23,7 +24,11 @@ const Header = () => {
 
         fetchClient();
     }, [user]);
-    console.log('User:', user);
+
+    const handleLogout = () => {
+        logout(); // Вызываем функцию выхода
+        navigate('/login'); // Перенаправляем на страницу авторизации
+    };
 
     return (
         <header className="header">
@@ -69,7 +74,6 @@ const Header = () => {
                                     <span>путешественники</span>
                                 </Link>
                             )}
-
                         </div>
                     ) : (
                         <Link to="/login" className="header-link">
@@ -77,9 +81,11 @@ const Header = () => {
                         </Link>
                     )}
                 </nav>
-                <button onClick={logout} className="header-button">
-                    Выйти
-                </button>
+                {isAuthenticated && (
+                    <button onClick={handleLogout} className="header-button">
+                        Выйти
+                    </button>
+                )}
             </div>
         </header>
     );

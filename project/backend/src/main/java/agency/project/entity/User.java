@@ -30,6 +30,7 @@ public class User implements UserDetails {
     private Role role;
 
     @Pattern(regexp = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$")
+    @Column(unique = true)
     private String email;
 
     @CreationTimestamp

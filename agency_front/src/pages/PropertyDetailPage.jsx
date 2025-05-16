@@ -8,7 +8,9 @@ import { Link } from 'react-router-dom';
 import "../styles/PropertyDetailPage.css"
 import { useNavigate } from 'react-router-dom';
 import { deleteProperty } from '../api/propertyService'; // Импортируй delete
-
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import ImageSlider from "../components/Layout/ImageSlider";
 
 const PropertyDetailPage = () => {
     const { id } = useParams();
@@ -16,13 +18,10 @@ const PropertyDetailPage = () => {
     const [property, setProperty] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-
     const [clients, setClients] = useState([]); // Список клиентов
     const [selectedClientId, setSelectedClientId] = useState('');
     const [clientData, setClientData] = useState(null);
-
     const isManager = user?.role === 'MANAGER';
-
     const navigate = useNavigate();
 
     const handleDelete = async () => {
@@ -32,7 +31,7 @@ const PropertyDetailPage = () => {
         try {
             await deleteProperty(property.id);
             alert('Помещение успешно удалено');
-            navigate('/properties'); // Перенаправление, подкорректируй под свой роутинг
+            navigate('/manager-dashboard'); // Перенаправление, подкорректируй под свой роутинг
         } catch (error) {
             alert('Ошибка при удалении помещения');
             console.error(error);
@@ -44,6 +43,8 @@ const PropertyDetailPage = () => {
             try {
                 const data = await getPropertyById(id);
                 setProperty(data);
+                console.log('Image path:', data.imagePaths);
+
             } catch (err) {
                 setError('Ошибка при загрузке данных');
             } finally {
@@ -107,79 +108,127 @@ const PropertyDetailPage = () => {
     if (error) return <p>{error}</p>;
 
     return (
-        <div>
+        <div className="propertyDetailPage">
             <button className="back-button" onClick={() => navigate(-1)}>← Назад</button>
 
-            <div className="property-detail-page">
-
-            <h1>Детали недвижимости</h1>
-            {property ? (
-                <div>
-                    <h2>{property.title}</h2>
-                    <p>Город: {property.city}</p>
-                    <p>Район: {property.district}</p>
-                    <p>Улица: {property.street}</p>
-                    <p>Цена: {property.price}</p>
-                    <p>Количество комнат: {property.rooms}</p>
-                    <p>Этаж: {property.floor}</p>
-                    <p>Балкон: {property.hasBalcony ? 'Да' : 'Нет'}</p>
-                    <p>Тип: {property.propertyType}</p>
-                    <p>Животные: {property.allowPets ? 'Разрешены' : 'Запрещены'}</p>
-
+            <div className="details-container">
+                <div className="property-header">
+                    <h1>{property?.title}</h1>
                     {isManager && (
-                        <div className="form-group" style={{ marginTop: '20px' }}>
-                            <label>Клиент:</label>
-                            <select
-                                value={selectedClientId}
-                                onChange={handleClientChange}
-                                required
-                            >
-                                <option value="">-- Выберите клиента --</option>
-                                {clients.map(client => (
-                                    <option key={client.id} value={client.id}>
-                                        {client.authUser
-                                            ? `${client.authUser.lastname} ${client.authUser.firstname}`
-                                            : `Клиент #${client.id}`}
-                                    </option>
-                                ))}
-                            </select>
-                            <button onClick={handleAssign} disabled={!selectedClientId}>
-                                Присвоить
+                        <div className="button-group">
+                            <Link to={`/properties/${id}/edit`}>
+                                <button className="btn-primary">Редактировать</button>
+                            </Link>
+                            <button className="btn-primary btn-danger" onClick={handleDelete}>
+                                Удалить
                             </button>
                         </div>
                     )}
-
-                    {!isManager && clientData?.accessLevel === 'TRAVELER' && property?.propertyLevel === 'TRAVEL' && (
-                        <div style={{ marginTop: '20px' }}>
-                            <button onClick={async () => {
-                                try {
-                                    await createTravelRequest(clientData.id, property.id);
-                                    alert('Запрос успешно отправлен');
-                                } catch (e) {
-                                    alert('Ошибка при отправке запроса');
-                                }
-                            }}>
-                                Отправить запрос
-                            </button>
-                        </div>
-                    )}
-                    {isManager && (
-                        <Link to={`/properties/${id}/edit`}>
-                            <button>Редактировать</button>
-                        </Link>
-                    )}
-                    {isManager && (
-                        <button className="delete-button" onClick={handleDelete}>
-                            Удалить помещение
-                        </button>
-                    )}
-
-
                 </div>
-            ) : (
-                <p>Информация о недвижимости не найдена</p>
-            )}
-        </div>
+
+                <div className="image-slider-container">
+                    {Array.isArray(property.imagePaths) && property.imagePaths.length > 0 && (
+                        <ImageSlider images={property.imagePaths} />
+                    )}
+                </div>
+
+                <div className="property-info-grid">
+
+                    <div className="property-info-section">
+                        <h3>Основная информация</h3>
+                        <div className="info-item">
+                            <span className="info-label">Город:</span>
+                            <span className="info-value">{property.address.city}</span>
+                        </div>
+                        <div className="info-item">
+                            <span className="info-label">Район:</span>
+                            <span className="info-value">{property.address.district}</span>
+                        </div>
+                        <div className="info-item">
+                            <span className="info-label">Улица:</span>
+                            <span className="info-value">{property.address.street}</span>
+                        </div>
+                    </div>
+
+                    <div className="property-info-section">
+                        <h3>Характеристики</h3>
+                        <div className="info-item">
+                            <span className="info-label">Цена:</span>
+                            <span className="info-value">{property.price} ₽</span>
+                        </div>
+                        <div className="info-item">
+                            <span className="info-label">Комнат:</span>
+                            <span className="info-value">{property.rooms}</span>
+                        </div>
+                        <div className="info-item">
+                            <span className="info-label">Этаж:</span>
+                            <span className="info-value">{property.floor}</span>
+                        </div>
+                    </div>
+
+                    <div className="property-info-section">
+                        <h3>Дополнительно</h3>
+                        <div className="info-item">
+                            <span className="info-label">Балкон:</span>
+                            <span className="info-value">{property.hasBalcony ? 'Да' : 'Нет'}</span>
+                        </div>
+                        <div className="info-item">
+                            <span className="info-label">Тип:</span>
+                            <span className="info-value">{property.propertyType}</span>
+                        </div>
+                        <div className="info-item">
+                            <span className="info-label">Животные:</span>
+                            <span className="info-value">{property.allowPets ? 'Разрешены' : 'Запрещены'}</span>
+                        </div>
+                    </div>
+                </div>
+
+                {(isManager || clientData?.accessLevel === 'TRAVELER') && (
+                    <div className="actions-section">
+                        {isManager && (
+                            <>
+                                <select
+                                    className="select-client"
+                                    value={selectedClientId}
+                                    onChange={handleClientChange}
+                                >
+                                    <option value="">Выберите клиента</option>
+                                    {clients.map(client => (
+                                        <option key={client.id} value={client.id}>
+                                            {client.authUser
+                                                ? `${client.authUser.lastname} ${client.authUser.firstname}`
+                                                : `Клиент #${client.id}`}
+                                        </option>
+                                    ))}
+                                </select>
+                                <button
+                                    className="btn-primary"
+                                    onClick={handleAssign}
+                                    disabled={!selectedClientId}
+                                >
+                                    Присвоить клиенту
+                                </button>
+                            </>
+                        )}
+
+                        {!isManager && clientData?.accessLevel === 'TRAVELER' && property?.propertyLevel === 'TRAVEL' && (
+                            <button
+                                className="btn-primary"
+                                onClick={async () => {
+                                    try {
+                                        await createTravelRequest(clientData.id, property.id);
+                                        alert('Запрос успешно отправлен');
+                                    } catch (e) {
+                                        alert('Ошибка при отправке запроса');
+                                    }
+                                }}
+                            >
+                                Отправить запрос на просмотр
+                            </button>
+                        )}
+                    </div>
+                )}
+            </div>
         </div>
     );
 };

@@ -41,7 +41,7 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
                 .cors(Customizer.withDefaults())
-                .authorizeHttpRequests(request -> request.requestMatchers("/api/auth/**","/swagger-ui/**","v3/api-docs","/swagger/**", "/test-auth.html", "/static/**")
+                .authorizeHttpRequests(request -> request.requestMatchers("/api/auth/**","/swagger-ui/**","v3/api-docs","/swagger/**", "/test-auth.html", "/uploads/**", "/static/**")
                         .permitAll()
                         .requestMatchers("/api/admin").hasAnyAuthority(Role.ADMIN.name())
                         .anyRequest().authenticated())

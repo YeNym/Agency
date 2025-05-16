@@ -9,16 +9,20 @@ const Applications = () => {
     const [statusList, setStatusList] = useState([]);
     const [statusUpdates, setStatusUpdates] = useState({}); // {requestId: selectedStatus}
     const navigate = useNavigate();
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
+                setIsLoading(true);
                 const response = await getPendingRequests();
                 setRequests(response);
-                const enums  = await getPropertyEnums();
-                setStatusList(enums.requestStatuses || []); // Предположим, что статусы приходят в поле `statuses`
+                const enums = await getPropertyEnums();
+                setStatusList(enums.requestStatuses || []);
             } catch (error) {
                 console.error("Ошибка при загрузке данных:", error);
+            } finally {
+                setIsLoading(false);
             }
         };
 
@@ -56,10 +60,18 @@ const Applications = () => {
         }
     };
 
-    if (!requests.length) {
+    if (isLoading) {
         return <div>Загрузка...</div>;
     }
+    if (!requests.length) {
+        return (
+            <div className="no-applications">
+                <button className="back-button" onClick={() => navigate(-1)}>← Назад</button>
+                <h2>Пока тут пусто</h2>
 
+            </div>
+        );
+    }
     return (
         <div>
                 <button className="back-button" onClick={() => navigate(-1)}>← Назад</button>

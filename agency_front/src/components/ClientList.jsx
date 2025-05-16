@@ -163,6 +163,8 @@ const ClientList = ({ managerId }) => {
 
         <div className="clients-preferences-table">
             <h2 className="client-preferenses">Клиенты и их предпочтения</h2>
+            <div className="table-container">
+
             <table>
                 <thead>
                 <tr>
@@ -206,8 +208,6 @@ const ClientList = ({ managerId }) => {
                                 >
                                     🗑️ Удалить
                                 </button>
-
-
                             </td>
                         </tr>
 
@@ -343,6 +343,7 @@ const ClientList = ({ managerId }) => {
                 </div>
             )}
             <div>
+            </div>
             </div>
 
         </div>

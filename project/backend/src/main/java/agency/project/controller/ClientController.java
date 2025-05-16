@@ -2,6 +2,7 @@ package agency.project.controller;
 
 import agency.project.dto.ClientUpdateDTO;
 import agency.project.entity.Client;
+import agency.project.entity.User;
 import agency.project.entity.enumerated.AccessLevel;
 import agency.project.repository.ClientRepository;
 import agency.project.services.ClientService;
@@ -92,6 +93,12 @@ public class ClientController {
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
-
+    // Добавляем новый эндпоинт в контроллер
+    @GetMapping("/{clientId}/user")
+    public ResponseEntity<User> getUserByClientId(@PathVariable Long clientId) {
+        Optional<User> user = clientService.getUserByClientId(clientId);
+        return user.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
 
 }

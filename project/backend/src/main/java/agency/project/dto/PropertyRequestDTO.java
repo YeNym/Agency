@@ -40,4 +40,6 @@ public class PropertyRequestDTO {
     public void setClient(Client client) {
         this.client = client;
     }
+
+
 }
